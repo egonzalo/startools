@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+	<persistence-unit name="startoolsJPA">
+		<class>com.eg0n.startools.Armor</class>
+		<class>com.eg0n.startools.BackgroundStatChoice</class>
+		<class>com.eg0n.startools.Background</class>
+		<class>com.eg0n.startools.CharacterPower</class>
+		<class>com.eg0n.startools.CharacterPowerPK</class>
+		<class>com.eg0n.startools.CharacterRole</class>
+		<class>com.eg0n.startools.Character</class>
+		<class>com.eg0n.startools.CreatureAttribute</class>
+		<class>com.eg0n.startools.Creature</class>
+		<class>com.eg0n.startools.CrewShipUpgrade</class>
+		<class>com.eg0n.startools.CrewShip</class>
+		<class>com.eg0n.startools.Crew</class>
+		<class>com.eg0n.startools.EncounterEntry</class>
+		<class>com.eg0n.startools.EncounterTable</class>
+		<class>com.eg0n.startools.EquipmentSlot</class>
+		<class>com.eg0n.startools.EquipmentType</class>
+		<class>com.eg0n.startools.PowerCategory</class>
+		<class>com.eg0n.startools.Power</class>
+		<class>com.eg0n.startools.ShipUpgrade</class>
+		<class>com.eg0n.startools.SoldierClass</class>
+		<class>com.eg0n.startools.SoldierType</class>
+		<class>com.eg0n.startools.Soldier</class>
+		<class>com.eg0n.startools.Weapon</class>
+	</persistence-unit>
+</persistence>

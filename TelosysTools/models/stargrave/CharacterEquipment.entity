@@ -1,0 +1,9 @@
+@DbTable(character_equipment)
+@DbSchema(stargrave)
+@JoinEntity
+CharacterEquipment {
+  // attributes
+  characterId : int { @Id @DbName(character_id) @DbType(int4) @NotNull @NotEmpty @FK(character_equipment_character_id_fkey, Characters.characterId) };
+  equipmentTypeId : int { @Id @DbName(equipment_type_id) @DbType(int4) @NotNull @NotEmpty @FK(character_equipment_equipment_type_id_fkey, EquipmentTypes.equipmentTypeId) };
+  // links
+}

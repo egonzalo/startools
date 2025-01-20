@@ -1,0 +1,11 @@
+@DbTable(character_powers)
+@DbSchema(stargrave)
+CharacterPowers {
+  // attributes
+  characterId : int { @Id @DbName(character_id) @DbType(int4) @NotNull @NotEmpty @FK(character_powers_character_id_fkey, Characters.characterId) };
+  powerId : int { @Id @DbName(power_id) @DbType(int4) @NotNull @NotEmpty @FK(character_powers_power_id_fkey, Powers.powerId) };
+  activationNumber : int { @DbName(activation_number) @DbType(int4) @NotNull @NotEmpty };
+  // links
+  characters : Characters { @LinkByFK(character_powers_character_id_fkey) };
+  powers : Powers { @LinkByFK(character_powers_power_id_fkey) };
+}

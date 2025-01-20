@@ -1,0 +1,12 @@
+@DbTable(ship_upgrades)
+@DbSchema(stargrave)
+ShipUpgrades {
+  // attributes
+  shipUpgradeId : int { @Id @GeneratedValue(IDENTITY) @DbName(ship_upgrade_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  cost : int { @DbName(cost) @DbType(int4) @NotNull @NotEmpty };
+  description : string { @DbName(description) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  maxQuantity : int { @DbName(max_quantity) @DbType(int4) };
+  // links
+  crewshipupgradesList : CrewShipUpgrades[];
+}

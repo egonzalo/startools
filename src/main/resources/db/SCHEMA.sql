@@ -29,36 +29,36 @@ CREATE TABLE stargrave.crew_ships (
 
 -- Drop table
 
--- DROP TABLE stargrave.backgrounds;
+-- DROP TABLE stargrave.stat_choices;
+CREATE TABLE stargrave.stat_choices (
+    stat_choice_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description TEXT
+);
 
+-- Drop table
+
+-- DROP TABLE stargrave.backgrounds;
 CREATE TABLE stargrave.backgrounds (
-	background_id serial4 NOT NULL,
-	"name" varchar(50) NOT NULL,
-	description text NULL,
-	stat_modifications text NULL,
-	will_bonus int4 NULL,
-	health_bonus int4 NULL,
-	health_mod int4 DEFAULT 0 NULL,
-	will_mod int4 DEFAULT 0 NULL,
-	move_mod int4 DEFAULT 0 NULL,
-	fight_mod int4 DEFAULT 0 NULL,
-	shoot_mod int4 DEFAULT 0 NULL,
-	CONSTRAINT backgrounds_pkey PRIMARY KEY (background_id)
+    background_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description TEXT,
+    health_mod INTEGER DEFAULT 0,
+    will_mod INTEGER DEFAULT 0,
+    move_mod INTEGER DEFAULT 0,
+    fight_mod INTEGER DEFAULT 0,
+    shoot_mod INTEGER DEFAULT 0,
+    choices_allowed INTEGER NOT NULL
 );
 
 -- Drop table
 
 -- DROP TABLE stargrave.background_stat_choices;
-
 CREATE TABLE stargrave.background_stat_choices (
-	background_id int4 NULL,
-	choices_allowed int4 NOT NULL,
-	can_choose_move bool DEFAULT false NULL,
-	can_choose_fight bool DEFAULT false NULL,
-	can_choose_shoot bool DEFAULT false NULL,
-	can_choose_health bool DEFAULT false NULL,
-	CONSTRAINT background_stat_choices_background_id_key UNIQUE (background_id),
-	CONSTRAINT background_stat_choices_background_id_fkey FOREIGN KEY (background_id) REFERENCES stargrave.backgrounds(background_id)
+    background_stat_choice_id SERIAL PRIMARY KEY,
+    background_id INTEGER REFERENCES stargrave.backgrounds(background_id),
+    stat_choice_id INTEGER REFERENCES stargrave.stat_choices(stat_choice_id),
+    UNIQUE(background_id, stat_choice_id)
 );
 
 -- Drop table
@@ -148,13 +148,11 @@ CREATE TABLE stargrave.powers (
 -- Drop table
 
 -- DROP TABLE stargrave.background_core_powers;
-
 CREATE TABLE stargrave.background_core_powers (
-	background_id int4 NOT NULL,
-	power_id int4 NOT NULL,
-	CONSTRAINT background_core_powers_pkey PRIMARY KEY (background_id, power_id),
-	CONSTRAINT background_core_powers_background_id_fkey FOREIGN KEY (background_id) REFERENCES stargrave.backgrounds(background_id),
-	CONSTRAINT background_core_powers_power_id_fkey FOREIGN KEY (power_id) REFERENCES stargrave.powers(power_id)
+    background_core_power_id SERIAL PRIMARY KEY,
+    background_id INTEGER REFERENCES stargrave.backgrounds(background_id),
+    power_id INTEGER REFERENCES stargrave.powers(power_id),
+    UNIQUE(background_id, power_id)
 );
 
 -- Drop table

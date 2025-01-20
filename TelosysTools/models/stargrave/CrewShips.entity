@@ -1,0 +1,11 @@
+@DbTable(crew_ships)
+@DbSchema(stargrave)
+CrewShips {
+  // attributes
+  shipId : int { @Id @GeneratedValue(IDENTITY) @DbName(ship_id) @DbType(serial) @NotNull @NotEmpty };
+  crewId : int { @DbName(crew_id) @DbType(int4) @FK(crew_ships_crew_id_fkey, Crews.crewId) };
+  name : string { @DbName(name) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  // links
+  crewshipupgradesList : CrewShipUpgrades[];
+  crews : Crews { @LinkByFK(crew_ships_crew_id_fkey) };
+}

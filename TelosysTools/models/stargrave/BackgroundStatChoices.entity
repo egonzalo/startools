@@ -1,0 +1,11 @@
+@DbTable(background_stat_choices)
+@DbSchema(stargrave)
+BackgroundStatChoices {
+  // attributes
+  backgroundStatChoiceId : int { @Id @GeneratedValue(IDENTITY) @DbName(background_stat_choice_id) @DbType(serial) @NotNull @NotEmpty };
+  backgroundId : int { @DbName(background_id) @DbType(int4) @FK(background_stat_choices_background_id_fkey, Backgrounds.backgroundId) };
+  statChoiceId : int { @DbName(stat_choice_id) @DbType(int4) @FK(background_stat_choices_stat_choice_id_fkey, StatChoices.statChoiceId) };
+  // links
+  backgrounds : Backgrounds { @LinkByFK(background_stat_choices_background_id_fkey) };
+  statchoices : StatChoices { @LinkByFK(background_stat_choices_stat_choice_id_fkey) };
+}

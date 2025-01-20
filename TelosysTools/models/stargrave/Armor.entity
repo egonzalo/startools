@@ -1,0 +1,14 @@
+@DbTable(armor)
+@DbSchema(stargrave)
+Armor {
+  // attributes
+  armorId : int { @Id @GeneratedValue(IDENTITY) @DbName(armor_id) @DbType(serial) @NotNull @NotEmpty };
+  equipmentTypeId : int { @DbName(equipment_type_id) @DbType(int4) @FK(armor_equipment_type_id_fkey, EquipmentTypes.equipmentTypeId) };
+  name : string { @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  armorModifier : int { @DbName(armor_modifier) @DbType(int4) @NotNull @NotEmpty };
+  gearSlots : int { @DbName(gear_slots) @DbType(int4) @NotNull @NotEmpty };
+  movementPenalty : int { @DbName(movement_penalty) @DbType(int4) };
+  notes : string { @DbName(notes) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  // links
+  equipmenttypes : EquipmentTypes { @LinkByFK(armor_equipment_type_id_fkey) };
+}

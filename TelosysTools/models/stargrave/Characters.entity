@@ -1,0 +1,24 @@
+@DbTable(characters)
+@DbSchema(stargrave)
+Characters {
+  // attributes
+  characterId : int { @Id @GeneratedValue(IDENTITY) @DbName(character_id) @DbType(serial) @NotNull @NotEmpty };
+  crewId : int { @DbName(crew_id) @DbType(int4) @FK(characters_crew_id_fkey, Crews.crewId) };
+  backgroundId : int { @DbName(background_id) @DbType(int4) @FK(characters_background_id_fkey, Backgrounds.backgroundId) };
+  name : string { @DbName(name) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  roleId : int { @DbName(role_id) @DbType(int4) @FK(characters_role_id_fkey, CharacterRoles.characterRoleId) };
+  level : int { @DbName(level) @DbType(int4) @NotNull @NotEmpty };
+  move : int { @DbName(move) @DbType(int4) @NotNull @NotEmpty };
+  fight : int { @DbName(fight) @DbType(int4) @NotNull @NotEmpty };
+  shoot : int { @DbName(shoot) @DbType(int4) @NotNull @NotEmpty };
+  armor : int { @DbName(armor) @DbType(int4) @NotNull @NotEmpty };
+  will : int { @DbName(will) @DbType(int4) @NotNull @NotEmpty };
+  health : int { @DbName(health) @DbType(int4) @NotNull @NotEmpty };
+  currentHealth : int { @DbName(current_health) @DbType(int4) };
+  // links
+  equipmenttypesList : EquipmentTypes[] { @ManyToMany @LinkByJoinEntity(CharacterEquipment) };
+  characterpowersList : CharacterPowers[];
+  backgrounds : Backgrounds { @LinkByFK(characters_background_id_fkey) };
+  crews : Crews { @LinkByFK(characters_crew_id_fkey) };
+  characterroles : CharacterRoles { @LinkByFK(characters_role_id_fkey) };
+}

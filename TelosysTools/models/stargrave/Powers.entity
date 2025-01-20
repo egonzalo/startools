@@ -1,0 +1,15 @@
+@DbTable(powers)
+@DbSchema(stargrave)
+Powers {
+  // attributes
+  powerId : int { @Id @GeneratedValue(IDENTITY) @DbName(power_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  activationNumber : int { @DbName(activation_number) @DbType(int4) @NotNull @NotEmpty };
+  strain : int { @DbName(strain) @DbType(int4) @NotNull @NotEmpty };
+  categoryId : int { @DbName(category_id) @DbType(int4) @FK(powers_category_id_fkey, PowerCategories.powerCategoryId) };
+  description : string { @DbName(description) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  // links
+  backgroundcorepowersList : BackgroundCorePowers[];
+  characterpowersList : CharacterPowers[];
+  powercategories : PowerCategories { @LinkByFK(powers_category_id_fkey) };
+}

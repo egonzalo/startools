@@ -1,0 +1,9 @@
+@DbTable(creature_attributes_link)
+@DbSchema(stargrave)
+@JoinEntity
+CreatureAttributesLink {
+  // attributes
+  creatureId : int { @Id @DbName(creature_id) @DbType(int4) @NotNull @NotEmpty @FK(creature_attributes_link_creature_id_fkey, Creatures.creatureId) };
+  attributeId : int { @Id @DbName(attribute_id) @DbType(int4) @NotNull @NotEmpty @FK(creature_attributes_link_attribute_id_fkey, CreatureAttributes.attributeId) };
+  // links
+}

@@ -1,0 +1,13 @@
+@DbTable(crews)
+@DbSchema(stargrave)
+Crews {
+  // attributes
+  crewId : int { @Id @GeneratedValue(IDENTITY) @DbName(crew_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  credits : int { @DbName(credits) @DbType(int4) };
+  experience : int { @DbName(experience) @DbType(int4) };
+  // links
+  charactersList : Characters[];
+  crewshipsList : CrewShips[];
+  soldiersList : Soldiers[];
+}

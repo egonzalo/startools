@@ -1,0 +1,14 @@
+@DbTable(weapons)
+@DbSchema(stargrave)
+Weapons {
+  // attributes
+  weaponId : int { @Id @GeneratedValue(IDENTITY) @DbName(weapon_id) @DbType(serial) @NotNull @NotEmpty };
+  equipmentTypeId : int { @DbName(equipment_type_id) @DbType(int4) @FK(weapons_equipment_type_id_fkey, EquipmentTypes.equipmentTypeId) };
+  name : string { @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  damageModifier : int { @DbName(damage_modifier) @DbType(int4) };
+  maxRange : int { @DbName(max_range) @DbType(int4) };
+  gearSlots : int { @DbName(gear_slots) @DbType(int4) @NotNull @NotEmpty };
+  notes : string { @DbName(notes) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  // links
+  equipmenttypes : EquipmentTypes { @LinkByFK(weapons_equipment_type_id_fkey) };
+}

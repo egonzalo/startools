@@ -1,0 +1,11 @@
+@DbTable(background_core_powers)
+@DbSchema(stargrave)
+BackgroundCorePowers {
+  // attributes
+  backgroundCorePowerId : int { @Id @GeneratedValue(IDENTITY) @DbName(background_core_power_id) @DbType(serial) @NotNull @NotEmpty };
+  backgroundId : int { @DbName(background_id) @DbType(int4) @FK(background_core_powers_background_id_fkey, Backgrounds.backgroundId) };
+  powerId : int { @DbName(power_id) @DbType(int4) @FK(background_core_powers_power_id_fkey, Powers.powerId) };
+  // links
+  backgrounds : Backgrounds { @LinkByFK(background_core_powers_background_id_fkey) };
+  powers : Powers { @LinkByFK(background_core_powers_power_id_fkey) };
+}

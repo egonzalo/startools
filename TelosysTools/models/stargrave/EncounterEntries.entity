@@ -1,0 +1,14 @@
+@DbTable(encounter_entries)
+@DbSchema(stargrave)
+EncounterEntries {
+  // attributes
+  encounterEntryId : int { @Id @GeneratedValue(IDENTITY) @DbName(encounter_entry_id) @DbType(serial) @NotNull @NotEmpty };
+  encounterTableId : int { @DbName(encounter_table_id) @DbType(int4) @FK(encounter_entries_encounter_table_id_fkey, EncounterTables.encounterTableId) };
+  creatureId : int { @DbName(creature_id) @DbType(int4) @FK(encounter_entries_creature_id_fkey, Creatures.creatureId) };
+  minRoll : int { @DbName(min_roll) @DbType(int4) @NotNull @NotEmpty };
+  maxRoll : int { @DbName(max_roll) @DbType(int4) @NotNull @NotEmpty };
+  quantity : int { @DbName(quantity) @DbType(int4) };
+  // links
+  creatures : Creatures { @LinkByFK(encounter_entries_creature_id_fkey) };
+  encountertables : EncounterTables { @LinkByFK(encounter_entries_encounter_table_id_fkey) };
+}

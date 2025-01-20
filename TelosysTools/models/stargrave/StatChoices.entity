@@ -1,0 +1,10 @@
+@DbTable(stat_choices)
+@DbSchema(stargrave)
+StatChoices {
+  // attributes
+  statChoiceId : int { @Id @GeneratedValue(IDENTITY) @DbName(stat_choice_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  description : string { @DbName(description) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  // links
+  backgroundstatchoicesList : BackgroundStatChoices[];
+}

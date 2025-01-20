@@ -1,0 +1,11 @@
+@DbTable(encounter_tables)
+@DbSchema(stargrave)
+EncounterTables {
+  // attributes
+  encounterTableId : int { @Id @GeneratedValue(IDENTITY) @DbName(encounter_table_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  description : string { @DbName(description) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  active : boolean { @DbName(active) @DbType(bool) };
+  // links
+  encounterentriesList : EncounterEntries[];
+}

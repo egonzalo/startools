@@ -1,0 +1,14 @@
+@DbTable(soldiers)
+@DbSchema(stargrave)
+Soldiers {
+  // attributes
+  soldierId : int { @Id @GeneratedValue(IDENTITY) @DbName(soldier_id) @DbType(serial) @NotNull @NotEmpty };
+  crewId : int { @DbName(crew_id) @DbType(int4) @FK(soldiers_crew_id_fkey, Crews.crewId) };
+  soldierTypeId : int { @DbName(soldier_type_id) @DbType(int4) @FK(soldiers_soldier_type_id_fkey, SoldierTypes.soldierTypeId) };
+  name : string { @DbName(name) @DbType("varchar(100)") @Size(100) @MaxLen(100) };
+  currentHealth : int { @DbName(current_health) @DbType(int4) };
+  // links
+  equipmenttypesList : EquipmentTypes[] { @ManyToMany @LinkByJoinEntity(SoldierEquipment) };
+  crews : Crews { @LinkByFK(soldiers_crew_id_fkey) };
+  soldiertypes : SoldierTypes { @LinkByFK(soldiers_soldier_type_id_fkey) };
+}

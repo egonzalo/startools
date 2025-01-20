@@ -1,0 +1,19 @@
+@DbTable(soldier_types)
+@DbSchema(stargrave)
+SoldierTypes {
+  // attributes
+  soldierTypeId : int { @Id @GeneratedValue(IDENTITY) @DbName(soldier_type_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  classId : int { @DbName(class_id) @DbType(int4) @FK(soldier_types_class_id_fkey, SoldierClasses.soldierClassId) };
+  move : int { @DbName(move) @DbType(int4) @NotNull @NotEmpty };
+  fight : int { @DbName(fight) @DbType(int4) @NotNull @NotEmpty };
+  shoot : int { @DbName(shoot) @DbType(int4) @NotNull @NotEmpty };
+  armor : int { @DbName(armor) @DbType(int4) @NotNull @NotEmpty };
+  will : int { @DbName(will) @DbType(int4) @NotNull @NotEmpty };
+  health : int { @DbName(health) @DbType(int4) @NotNull @NotEmpty };
+  cost : int { @DbName(cost) @DbType(int4) @NotNull @NotEmpty };
+  notes : string { @DbName(notes) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  // links
+  soldierclasses : SoldierClasses { @LinkByFK(soldier_types_class_id_fkey) };
+  soldiersList : Soldiers[];
+}

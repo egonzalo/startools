@@ -1,0 +1,18 @@
+@DbTable(creatures)
+@DbSchema(stargrave)
+Creatures {
+  // attributes
+  creatureId : int { @Id @GeneratedValue(IDENTITY) @DbName(creature_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  move : int { @DbName(move) @DbType(int4) @NotNull @NotEmpty };
+  fight : int { @DbName(fight) @DbType(int4) @NotNull @NotEmpty };
+  shoot : int { @DbName(shoot) @DbType(int4) @NotNull @NotEmpty };
+  armor : int { @DbName(armor) @DbType(int4) @NotNull @NotEmpty };
+  will : int { @DbName(will) @DbType(int4) @NotNull @NotEmpty };
+  health : int { @DbName(health) @DbType(int4) @NotNull @NotEmpty };
+  description : string { @DbName(description) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  bountyValue : int { @DbName(bounty_value) @DbType(int4) };
+  // links
+  creatureattributesList : CreatureAttributes[] { @ManyToMany @LinkByJoinEntity(CreatureAttributesLink) };
+  encounterentriesList : EncounterEntries[];
+}

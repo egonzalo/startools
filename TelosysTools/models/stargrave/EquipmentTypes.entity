@@ -1,0 +1,15 @@
+@DbTable(equipment_types)
+@DbSchema(stargrave)
+EquipmentTypes {
+  // attributes
+  equipmentTypeId : int { @Id @GeneratedValue(IDENTITY) @DbName(equipment_type_id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  slotTypeId : int { @DbName(slot_type_id) @DbType(int4) @FK(equipment_types_slot_type_id_fkey, EquipmentSlots.equipmentSlotId) };
+  description : string { @DbName(description) @DbType("text(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  // links
+  armorList : Armor[];
+  charactersList : Characters[] { @ManyToMany @LinkByJoinEntity(CharacterEquipment) };
+  equipmentslots : EquipmentSlots { @LinkByFK(equipment_types_slot_type_id_fkey) };
+  soldiersList : Soldiers[] { @ManyToMany @LinkByJoinEntity(SoldierEquipment) };
+  weaponsList : Weapons[];
+}
